@@ -3,34 +3,31 @@ import { Link } from "react-router-dom";
 import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientesIndex.css"
 type props = {
-    clientes:Array<any>,
+    produto:Array<any>,
     
 }
-class TabelasCliente extends Component<props> {
+class TabelasProduto extends Component<props> {
     constructor(props: props | Readonly<props>) {
         super(props)
         this.gerarTr = this.gerarTr.bind(this)
     }
     gerarTr() {
-        if (this.props.clientes.length <= 0) {
+        if (this.props.produto.length <= 0) {
             return <></>
         } else {
-            let lista = this.props.clientes.map( (n) =>
+            let lista = this.props.produto.map( (n) =>
             <tr id={n.Id}>
             <td>{n.Nome}</td>
-            <td>{n.NomeSocial}</td>
-            <td>{n.Genero}</td>
-            <td>{n.Telefone}</td>
+            <td>{n.Preco}</td>
+            
             <td className="center">
-                <Link className="" to="/editarCliente"> 
+                <Link className="" to="/editarProduto"> 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
-                <Link className="" to="/cadastrarCliente"> 
+                <Link className="" to="/cadastrarProduto"> 
                     <i className=" botaoMedium small material-icons">delete</i> 
                 </Link>
-                <Link className="" to="/visualizarCliente"> 
-                    <i className=" botaoMedium small material-icons">remove_red_eye</i> 
-                </Link>
+               
                 
             </td>
         </tr>
@@ -48,9 +45,8 @@ class TabelasCliente extends Component<props> {
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Nome Social</th>
-                        <th>Gênero</th>
-                        <th>Telefone</th>
+                        <th>Preço</th>
+                        
                         <th className="center">Ações</th>
                     </tr>
                     </thead>
@@ -71,4 +67,4 @@ class TabelasCliente extends Component<props> {
 
     }
 }
-export default TabelasCliente;
+export default TabelasProduto;

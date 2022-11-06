@@ -2,27 +2,27 @@
     import { Link } from "react-router-dom";
     import BarraNavegacao from "../barraNavegacao";
     import "../../Css/clientesIndex.css"
-    import TabelasServico from "./tabelaServico";
+    import TabelasProduto from "./tabelaProdutos";
 
     var dados = [{
         Id: 0,
-        Nome: "Unha",
+        Nome: "Esmalte",
         Preco:3233
 
     }]
     var homens = [{
         Id: 0,
-        Nome: "Unha",
+        Nome: "Bolsa",
         Preco:3233
 
     }]
     var mulheres = [{
         Id: 0,
-        Nome: "Unha",
+        Nome: "Shampoo",
         Preco:3233
 
     }]
-    class ServicoIndex extends Component{
+    class ProdutosIndex extends Component{
         
         componentDidMount() {
             let el = document.querySelectorAll('.tabs');
@@ -41,20 +41,22 @@
                             <div className="col  s12 ">
                                 <div className="card " >
                                     <div className="card-content ">
-                                    <h1 className="card-title">Serviços</h1>
+                                    <h1 className="card-title">Produtos</h1>
                                     <hr></hr>
                                     <div className="card-body">
                                         <div className="row" >
                                             <div className="col s12" >
-                                                <Link className="botoesClientes" to="/cadastrarClienteServico"> 
+                                                <Link className="botoesClientes" to="/cadastrarClienteProduto"> 
                                                     <i className=" botaoMedium medium material-icons">group_add</i> 
                                                     
                                                 </Link>
-                                                <Link className="botoesClientes" to="/cadastrarServico"> 
+                                                <Link className="botoesClientes" to="/cadastrarProduto"> 
                                                     <i className=" botaoMedium medium material-icons">add_box</i> 
                                                     
                                                 </Link>
+                                               
                                             </div>
+                                           
                                         </div>
                                         
                                         <div className="row">
@@ -67,16 +69,16 @@
                                             </ul>
                                             </div>
                                             <div id="test1" className="col s12">
-                                                <TabelasServico servico={dados}/>
+                                                <TabelasProduto produto={dados}/>
                                             </div>
                                             <div id="test2" className="col s12">
-                                                <TabelasServico servico={homens}/>
+                                                <TabelasProduto produto={homens}/>
                                             </div>
                                             <div id="test3" className="col s12">
-                                                <TabelasServico  servico={mulheres}/>
+                                                <TabelasProduto produto={mulheres}/>
                                             </div>
                                             <div id="test4" className="col s12">
-                                                <TabelasServico  servico={dados}/>
+                                                <TabelasProduto produto={dados}/>
                                             </div>
                                         </div>
                                     
@@ -94,4 +96,4 @@
 
         }
     }
-    export default ServicoIndex;
+    export default ProdutosIndex;

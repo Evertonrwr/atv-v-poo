@@ -19,13 +19,13 @@ export default class BarraNavegacao extends Component<props> {
     }
 
     componentDidMount() {
-        document.addEventListener('DOMContentLoaded', function () {
+       
             let elems = document.querySelectorAll('.sidenav');
             M.Sidenav.init(elems)
 
             let select = document.querySelectorAll('.select');
             M.FormSelect.init(select)
-        });
+        
     }
 
     gerarListaBotoes() {

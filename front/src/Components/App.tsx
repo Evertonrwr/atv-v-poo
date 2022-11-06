@@ -8,7 +8,14 @@ import Cadastro from './clientes/cadastro';
 import Editar from './clientes/editar';
 import ClientesIndex from './clientes/clientes';
 import ServicoIndex from './servico/servico';
-
+import CadastroServico from './servico/cadastroServico';
+import EditarServico from './servico/editarServico';
+import Visualizar from './clientes/visualizar';
+import ProdutosIndex from './produtos/produtos';
+import CadastroProduto from './produtos/cadastroProduto';
+import EditarProduto from './produtos/editarProdutos';
+import CadastroClienteServico from './servico/cadastroClienteServico';
+import CadastroClienteProduto from './produtos/cadastroClienteProduto';
 
 class App extends Component {
   state = {
@@ -36,8 +43,17 @@ class App extends Component {
             <Route  path="/clientes" element={<ClientesIndex/>} />
             <Route  path="/cadastrarCliente" element={<Cadastro/>} />
             <Route  path="/editarCliente" element={<Editar/>} />
+            <Route  path="/visualizarCliente" element={<Visualizar/>} />
             <Route  path="/servicos" element={<ServicoIndex/>} />
+            <Route  path="/cadastrarServico" element={<CadastroServico/>} />
+            <Route  path="/editarServico" element={<EditarServico/>} />
+            <Route  path="/cadastrarClienteServico" element={<CadastroClienteServico/>} />
+            <Route  path="/produtos" element={<ProdutosIndex/>} />
+            <Route  path="/cadastrarProduto" element={<CadastroProduto/>} />
+            <Route  path="/editarProduto" element={<EditarProduto/>} />
+            <Route  path="/cadastrarClienteProduto" element={<CadastroClienteProduto/>} />
             <Route path="*" element={<Navigate to="/" />} />
+            
           </Routes>
         </div>
       </Router>

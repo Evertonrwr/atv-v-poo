@@ -6,7 +6,7 @@ type props = {
     servico:Array<any>,
     
 }
-class TabelasCliente extends Component<props> {
+class TabelasServico extends Component<props> {
     constructor(props: props | Readonly<props>) {
         super(props)
         this.gerarTr = this.gerarTr.bind(this)
@@ -27,9 +27,7 @@ class TabelasCliente extends Component<props> {
                 <Link className="" to="/cadastrarCliente"> 
                     <i className=" botaoMedium small material-icons">delete</i> 
                 </Link>
-                <Link className="" to="/verServico"> 
-                    <i className=" botaoMedium small material-icons">remove_red_eye</i> 
-                </Link>
+               
                 
             </td>
         </tr>
@@ -69,4 +67,4 @@ class TabelasCliente extends Component<props> {
 
     }
 }
-export default TabelasCliente;
+export default TabelasServico;
