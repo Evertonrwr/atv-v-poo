@@ -4,6 +4,7 @@ import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientesIndex.css"
 type props = {
     clientes:Array<any>,
+    deletar: Function
     
 }
 class TabelasCliente extends Component<props> {
@@ -11,23 +12,24 @@ class TabelasCliente extends Component<props> {
         super(props)
         this.gerarTr = this.gerarTr.bind(this)
     }
+    
     gerarTr() {
         if (this.props.clientes.length <= 0) {
-            return <></>
+            return <> </>
         } else {
             let lista = this.props.clientes.map( (n) =>
             <tr id={n.Id}>
             <td>{n.Nome}</td>
             <td>{n.NomeSocial}</td>
-            <td>{n.Genero}</td>
-            <td>{n.Telefone}</td>
+            <td>{n.Genero ==1 ? "Masculino" : "Feminino"}</td>
+            <td>{"(" + n.DDD + ") " + n.Telefone}</td>
             <td className="center">
                 <Link className="" to="/editarCliente"> 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
-                <Link className="" to="/cadastrarCliente"> 
+                <a className="" onClick={(e)=> this.props.deletar(e)} > 
                     <i className=" botaoMedium small material-icons">delete</i> 
-                </Link>
+                </a>
                 <Link className="" to="/visualizarCliente"> 
                     <i className=" botaoMedium small material-icons">remove_red_eye</i> 
                 </Link>

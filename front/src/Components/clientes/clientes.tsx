@@ -1,9 +1,13 @@
-    import React, {Component} from "react";
+    import React, {Component , useEffect} from "react";
     import { Link } from "react-router-dom";
     import BarraNavegacao from "../barraNavegacao";
     import "../../Css/clientesIndex.css"
     import TabelasCliente from "./tabelasClientes";
-
+    type props ={
+        geral:Array<any>,
+        homens:Array<any>,
+        mulheres:Array<any>
+    }
     var dados = [{
         Id: 0,
         Nome: "Everton Ricardo",
@@ -28,12 +32,92 @@
         Telefone: 32423423
 
     }]
-    class ClientesIndex extends Component{
+    class ClientesIndex extends Component<{}, {geral:Array<any>, homens:Array<any>, mulheres:Array<any>} >{
+        private temp:any;
+        constructor(props: props | Readonly<props>) {
+            super(props)
+            this.state= {
+                geral: [],
+                homens: [],
+                mulheres: []
+            }
+           
+            
+        }
+        
+        listarClientes = () =>{
+            fetch("/listarClientes", {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then((res)=> res.json()).then((data)=>{
+                console.log(data)
+               this.setState({
+                geral:data
+               })
+               
+            })
+        }
+        listarHomens = () =>{
+            fetch("/listarHomens", {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then((res)=> res.json()).then((data)=>{
+                console.log(data)
+               this.setState({
+                homens:data
+               })
+               
+            })
+        }
+        listarMulheres = () =>{
+            fetch("/listarMulheres", {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then((res)=> res.json()).then((data)=>{
+                console.log(data)
+               this.setState({
+                mulheres:data
+               })
+               
+            })
+        }
+        deletarUsuario = (e:any)=>{
+            e.preventDefault();
+            fetch("/deletarCliente" + "?id="+ e.target.closest('tr').id,{
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+    
+            }).then((res)=> res.json()).then((data)=>{
+                alert("Deletado com sucesso")
+                
+            
+               
+            })
+    
+        }
+        tempo = () => setInterval(() => {
+            this.listarClientes();
+            this.listarHomens();
+            this.listarMulheres();
+        }, 1);
         
         componentDidMount() {
             let el = document.querySelectorAll('.tabs');
-        
             M.Tabs.init(el)
+           
+            this.tempo();
+            this.listarClientes();
+            this.listarHomens();
+            this.listarMulheres();
+           
         }
 
         render(){
@@ -70,19 +154,19 @@
                                             </ul>
                                             </div>
                                             <div id="test1" className="col s12">
-                                                <TabelasCliente clientes={dados}/>
+                                                <TabelasCliente clientes={this.state.geral} deletar={this.deletarUsuario}/>
                                             </div>
                                             <div id="test2" className="col s12">
-                                                <TabelasCliente clientes={homens}/>
+                                                <TabelasCliente clientes={this.state.homens} deletar={this.deletarUsuario}/>
                                             </div>
                                             <div id="test3" className="col s12">
-                                                <TabelasCliente clientes={mulheres}/>
+                                                <TabelasCliente clientes={this.state.mulheres} deletar={this.deletarUsuario}/>
                                             </div>
                                             <div id="test4" className="col s12">
-                                                <TabelasCliente clientes={dados}/>
+                                                <TabelasCliente clientes={dados} deletar={this.deletarUsuario}/>
                                             </div>
                                             <div id="test5" className="col s12">
-                                                <TabelasCliente clientes={dados}/>
+                                                <TabelasCliente clientes={dados} deletar={this.deletarUsuario}/>
                                             </div>
                                         </div>
                                     

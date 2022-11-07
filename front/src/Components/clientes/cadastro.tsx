@@ -3,7 +3,43 @@ import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientes.css"
 import { Link } from "react-router-dom";
 class Cadastro extends Component{
-    componentDidMount() {
+
+    
+    cadastrarUsuario = (e:any) => {
+        e.preventDefault();
+        console.log("oi")
+        var nome = document.getElementById("nome") as HTMLInputElement;
+        var nomeSocial = document.getElementById("nomeSocial") as HTMLInputElement;
+        var genero = document.getElementById("sexo") as HTMLSelectElement
+        var cpf =  document.getElementById("cpf") as HTMLInputElement;
+        var rg = document.getElementById("rg") as HTMLInputElement;
+        var ddd = document.getElementById("ddd") as HTMLInputElement;
+        var telefone = document.getElementById("telefone") as HTMLInputElement;
+        
+        var dados ={
+            Nome:  nome.value,
+            NomeSocial: nomeSocial.value,
+            Genero: genero.value,
+            Cpf: cpf.value,
+            Rg: rg.value,
+            DDD: ddd.value,
+            Telefone: telefone.value 
+        }
+
+        fetch("/cadastroCliente", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(dados)
+        }).then((res)=> res.json()).then((data)=>{
+            alert(data.mensagem)
+            
+        })
+        
+    }
+    
+    componentDidMount()  {
             let select = document.querySelectorAll('.select');
             M.FormSelect.init(select)
     }
@@ -63,7 +99,12 @@ class Cadastro extends Component{
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="input-field col s12">
+                                            <div className="input-field col s3">
+                                            <input id="ddd" type="text" className="validate"/>
+                                            <label htmlFor="ddd">DDD</label>
+                                            </div>
+
+                                            <div className="input-field col s9">
                                             <input id="telefone" type="text" className="validate"/>
                                             <label htmlFor="telefone">Telefone</label>
                                             </div>
@@ -74,7 +115,7 @@ class Cadastro extends Component{
                                             <Link to="/Clientes">Voltar</Link>
                                            
                                             </button>
-                                            <button className="btn float" id="cadastrar"> Cadastrar</button>
+                                            <button onClick={this.cadastrarUsuario} className="btn float" id="cadastrar"> Cadastrar</button>
                                             </div>
                                         </div>
                                     

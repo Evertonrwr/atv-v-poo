@@ -63,7 +63,12 @@ class Editar extends Component{
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="input-field col s12">
+                                            <div className="input-field col s3">
+                                            <input id="ddd" type="text" className="validate"/>
+                                            <label htmlFor="ddd">DDD</label>
+                                            </div>
+                                            
+                                            <div className="input-field col s9">
                                             <input id="telefone" type="text" className="validate"/>
                                             <label htmlFor="telefone">Telefone</label>
                                             </div>
