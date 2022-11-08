@@ -24,13 +24,13 @@ class TabelasCliente extends Component<props> {
             <td>{n.Genero ==1 ? "Masculino" : "Feminino"}</td>
             <td>{"(" + n.DDD + ") " + n.Telefone}</td>
             <td className="center">
-                <Link className="" to="/editarCliente"> 
+                <Link className="" to={"/editarCliente/:id=" +n.Id } > 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
                 <a className="" onClick={(e)=> this.props.deletar(e)} > 
                     <i className=" botaoMedium small material-icons">delete</i> 
                 </a>
-                <Link className="" to="/visualizarCliente"> 
+                <Link className="" to={"/visualizarCliente/:id=" +n.Id }> 
                     <i className=" botaoMedium small material-icons">remove_red_eye</i> 
                 </Link>
                 

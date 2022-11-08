@@ -1,5 +1,6 @@
 import express from 'express';
 import ClientesController from './Controllers/clientesController';
+import ServicoController from './Controllers/servicoController';
 
 const app: express.Application = express();
 
@@ -8,6 +9,7 @@ const port: number = 5000;
 app.use(express.json())
 
 app.use(ClientesController)
+app.use(ServicoController)
 
 app.get('/', (_req, _res) => {
     _res.send("TypeScript With Expresss");

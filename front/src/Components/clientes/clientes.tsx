@@ -101,19 +101,20 @@
             
                
             })
+            this.tempo();
     
         }
-        tempo = () => setInterval(() => {
+        tempo = ()  => {
             this.listarClientes();
             this.listarHomens();
             this.listarMulheres();
-        }, 1);
+        };
         
         componentDidMount() {
             let el = document.querySelectorAll('.tabs');
             M.Tabs.init(el)
            
-            this.tempo();
+           
             this.listarClientes();
             this.listarHomens();
             this.listarMulheres();

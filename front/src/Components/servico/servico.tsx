@@ -3,6 +3,9 @@
     import BarraNavegacao from "../barraNavegacao";
     import "../../Css/clientesIndex.css"
     import TabelasServico from "./tabelaServico";
+    type props ={
+        geral: Array<any>
+    }
 
     var dados = [{
         Id: 0,
@@ -22,12 +25,50 @@
         Preco:3233
 
     }]
-    class ServicoIndex extends Component{
+    class ServicoIndex extends Component<{}, {geral: Array<any>}>{
+        constructor(props: props | Readonly<props>) {
+            super(props)
+            this.state={
+                geral: []
+            }
+        }
         
+        listarServicos = () =>{
+            fetch("/listarServico", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then((res)=> res.json()).then((data)=>{
+                console.log(data)
+               this.setState({
+                geral:data
+               })
+               
+            })
+        }
+        deletarServico = (e:any)=>{
+            e.preventDefault();
+            fetch("/deletarServico" + "?id="+ e.target.closest('tr').id,{
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+    
+            }).then((res)=> res.json()).then((data)=>{
+                alert("Deletado com sucesso")
+            })
+            this.tempo();
+    
+        }
+        tempo = ()  => {
+            this.listarServicos();
+           
+        };
         componentDidMount() {
             let el = document.querySelectorAll('.tabs');
-        
             M.Tabs.init(el)
+            this.listarServicos();
         }
 
         render(){
@@ -67,16 +108,16 @@
                                             </ul>
                                             </div>
                                             <div id="test1" className="col s12">
-                                                <TabelasServico servico={dados}/>
+                                                <TabelasServico servico={this.state.geral} deletar={this.deletarServico}/>
                                             </div>
                                             <div id="test2" className="col s12">
-                                                <TabelasServico servico={homens}/>
+                                                <TabelasServico servico={homens} deletar={this.deletarServico}/>
                                             </div>
                                             <div id="test3" className="col s12">
-                                                <TabelasServico  servico={mulheres}/>
+                                                <TabelasServico  servico={mulheres} deletar={this.deletarServico}/>
                                             </div>
                                             <div id="test4" className="col s12">
-                                                <TabelasServico  servico={dados}/>
+                                                <TabelasServico  servico={dados} deletar={this.deletarServico}/>
                                             </div>
                                         </div>
                                     

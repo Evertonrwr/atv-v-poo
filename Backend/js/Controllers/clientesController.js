@@ -63,4 +63,38 @@ ClientesController.delete("/deletarCliente", (req, res) => __awaiter(void 0, voi
     var id = req.query.id;
     yield clientes_1.default.destroy({ where: { Id: id } });
 }));
+ClientesController.get("/buscarCliente", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var id = req.query.id;
+    yield clientes_1.default.findByPk(id === null || id === void 0 ? void 0 : id.toString()).then((data) => {
+        res.json(data);
+    });
+}));
+ClientesController.post("/editarCliente", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var dados = req.body;
+    try {
+        clientes_1.default.update({
+            Nome: dados.Nome,
+            NomeSocial: dados.NomeSocial,
+            Cpf: parseInt(dados.Cpf),
+            DataEmissaoCpf: null,
+            Rg: parseInt(dados.Rg),
+            DataEmissaoRg: null,
+            DDD: parseInt(dados.DDD),
+            Telefone: parseInt(dados.Telefone),
+            Genero: parseInt(dados.Genero)
+        }, { where: {
+                Id: dados.Id
+            } });
+        res.json({
+            ok: true,
+            mensagem: "Sucesso ao editar cliente"
+        });
+    }
+    catch (error) {
+        res.json({
+            ok: false,
+            mensagem: error
+        });
+    }
+}));
 exports.default = ClientesController;

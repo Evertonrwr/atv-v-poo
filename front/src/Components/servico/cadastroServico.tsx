@@ -3,6 +3,31 @@ import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientes.css"
 import { Link } from "react-router-dom";
 class CadastroServico extends Component{
+    cadastrarServico = (e:any) => {
+        e.preventDefault();
+        console.log("oi")
+        var nome = document.getElementById("nome") as HTMLInputElement;
+        var preco = document.getElementById("preco") as HTMLInputElement;
+       
+        
+        var dados ={
+            Nome:  nome.value,
+            Preco: parseFloat(preco.value),
+            
+        }
+
+        fetch("/cadastrarServico", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(dados)
+        }).then((res)=> res.json()).then((data)=>{
+            alert(data.mensagem)
+            
+        })
+        
+    }
    
     
     render(){
@@ -43,7 +68,7 @@ class CadastroServico extends Component{
                                             <Link to="/servicos">Voltar</Link>
                                            
                                             </button>
-                                            <button className="btn float" id="cadastrar"> Cadastrar</button>
+                                            <button className="btn float" onClick={this.cadastrarServico}id="cadastrar"> Cadastrar</button>
                                             </div>
                                         </div>
                                     

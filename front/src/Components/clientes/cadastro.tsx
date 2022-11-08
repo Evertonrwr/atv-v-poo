@@ -111,8 +111,8 @@ class Cadastro extends Component{
                                         </div>
                                         <div className="row">
                                             <div className=" col s12">
-                                            <button className="btn " id="voltar" > 
-                                            <Link to="/Clientes">Voltar</Link>
+                                            <button className="btn " id="voltar" onClick={(e)=>{e.preventDefault(); window.location.href = "/Clientes"}} > 
+                                            Voltar
                                            
                                             </button>
                                             <button onClick={this.cadastrarUsuario} className="btn float" id="cadastrar"> Cadastrar</button>

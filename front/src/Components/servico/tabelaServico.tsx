@@ -4,7 +4,7 @@ import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientesIndex.css"
 type props = {
     servico:Array<any>,
-    
+    deletar: Function
 }
 class TabelasServico extends Component<props> {
     constructor(props: props | Readonly<props>) {
@@ -21,11 +21,11 @@ class TabelasServico extends Component<props> {
             <td>{n.Preco}</td>
             
             <td className="center">
-                <Link className="" to="/editarServico"> 
+                <Link className="" to={"/editarServico/:id=" +n.Id}> 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
                 <Link className="" to="/cadastrarCliente"> 
-                    <i className=" botaoMedium small material-icons">delete</i> 
+                    <i  onClick={(e)=> this.props.deletar(e)} className=" botaoMedium small material-icons">delete</i> 
                 </Link>
                
                 

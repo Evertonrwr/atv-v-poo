@@ -42,11 +42,11 @@ class App extends Component {
             <Route  path="/" element={<Home/>} />
             <Route  path="/clientes" element={<ClientesIndex/>} />
             <Route  path="/cadastrarCliente" element={<Cadastro/>} />
-            <Route  path="/editarCliente" element={<Editar/>} />
-            <Route  path="/visualizarCliente" element={<Visualizar/>} />
+            <Route  path="/editarCliente/:id" element={<Editar/>} />
+            <Route  path="/visualizarCliente/:id" element={<Visualizar/>} />
             <Route  path="/servicos" element={<ServicoIndex/>} />
             <Route  path="/cadastrarServico" element={<CadastroServico/>} />
-            <Route  path="/editarServico" element={<EditarServico/>} />
+            <Route  path="/editarServico/:id" element={<EditarServico/>} />
             <Route  path="/cadastrarClienteServico" element={<CadastroClienteServico/>} />
             <Route  path="/produtos" element={<ProdutosIndex/>} />
             <Route  path="/cadastrarProduto" element={<CadastroProduto/>} />
