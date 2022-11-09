@@ -79,7 +79,8 @@ ServicoController.post("/cadastrarClienteServico", async (req, res)=>{
             IdServico: dados.IdServico,
             Genero: dados.Genero,
             Nome: dados.Nome,
-            Preco: dados.Preco
+            Preco: dados.Preco,
+            NomeCliente : dados.NomeCliente
         })
         res.json({
             ok:true,
@@ -95,5 +96,38 @@ ServicoController.post("/cadastrarClienteServico", async (req, res)=>{
     }
    
 })
-
+ServicoController.get("/listarMaisConsumidos", async (req, res)=>{
+   
+    const { count, rows } = await ClienteServico.findAndCountAll({
+       
+        group: "IdServico",
+        })
+   
+    res.json({count: count, rows: rows})
+})
+ServicoController.get("/listarMaisConsumidosMoney", async (req, res)=>{
+   
+     await ClienteServico.findAll({
+        }).then((data)=>{
+            res.json({rows:data})
+        })
+})
+ServicoController.get("/listarMaisConsumidosHomens", async (req, res)=>{
+   
+    const { count, rows } = await ClienteServico.findAndCountAll({
+       where:{Genero:1},
+        group: "IdServico",
+        })
+   
+    res.json({count: count, rows: rows})
+})
+ServicoController.get("/listarMaisConsumidosMulheres", async (req, res)=>{
+   
+    const { count, rows } = await ClienteServico.findAndCountAll({
+       where:{Genero:2},
+        group: "IdServico",
+        })
+   
+    res.json({count: count, rows: rows})
+})
 export default ServicoController;

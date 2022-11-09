@@ -16,6 +16,9 @@ var ClienteProduto = conexao.define("clienteProdutos", {
     },
     Preco:{
         type: sequelize.REAL(6,2)
+    },
+    NomeCliente:{
+        type: sequelize.STRING
     }
    
 

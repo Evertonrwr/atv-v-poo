@@ -20,6 +20,9 @@ var ClienteProduto = conexao_1.default.define("clienteProdutos", {
     },
     Preco: {
         type: sequelize.REAL(6, 2)
+    },
+    NomeCliente: {
+        type: sequelize.STRING
     }
 });
 ClienteProduto.removeAttribute('id');

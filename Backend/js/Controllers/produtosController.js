@@ -77,7 +77,8 @@ ProdutoController.post("/cadastrarClienteProduto", (req, res) => __awaiter(void 
             IdProduto: dados.IdProduto,
             Genero: dados.Genero,
             Nome: dados.Nome,
-            Preco: dados.Preco
+            Preco: dados.Preco,
+            NomeCliente: dados.NomeCliente
         });
         res.json({
             ok: true,

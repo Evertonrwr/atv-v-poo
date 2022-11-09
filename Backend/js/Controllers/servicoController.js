@@ -78,7 +78,8 @@ ServicoController.post("/cadastrarClienteServico", (req, res) => __awaiter(void 
             IdServico: dados.IdServico,
             Genero: dados.Genero,
             Nome: dados.Nome,
-            Preco: dados.Preco
+            Preco: dados.Preco,
+            NomeCliente: dados.NomeCliente
         });
         res.json({
             ok: true,
@@ -91,5 +92,30 @@ ServicoController.post("/cadastrarClienteServico", (req, res) => __awaiter(void 
             mensagem: error
         });
     }
+}));
+ServicoController.get("/listarMaisConsumidos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteServico_1.default.findAndCountAll({
+        group: "IdServico",
+    });
+    res.json({ count: count, rows: rows });
+}));
+ServicoController.get("/listarMaisConsumidosMoney", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield clienteServico_1.default.findAll({}).then((data) => {
+        res.json({ rows: data });
+    });
+}));
+ServicoController.get("/listarMaisConsumidosHomens", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteServico_1.default.findAndCountAll({
+        where: { Genero: 1 },
+        group: "IdServico",
+    });
+    res.json({ count: count, rows: rows });
+}));
+ServicoController.get("/listarMaisConsumidosMulheres", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteServico_1.default.findAndCountAll({
+        where: { Genero: 2 },
+        group: "IdServico",
+    });
+    res.json({ count: count, rows: rows });
 }));
 exports.default = ServicoController;
