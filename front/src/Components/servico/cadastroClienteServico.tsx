@@ -7,8 +7,8 @@ import { render } from "@testing-library/react";
 
 function CadastroClienteServico (){
     
-    var cliente =[{Id:0, Nome:""}]
-    var servico =[{Id:0, Nome:""}]
+    var cliente =[{Id:0, Nome:"", Genero:0}]
+    var servico =[{Id:0, Nome:"", Preco:0.1}]
     const [clientes, setClientes] = useState(cliente)
     const [servicos, setServicos] = useState(servico)
     
@@ -32,6 +32,37 @@ function CadastroClienteServico (){
            setClientes(data )
         })
     }
+    function cadastrarConsumo (e:any){
+        e.preventDefault();
+        var IdServico = document.getElementById("servico") as HTMLSelectElement
+        var IdCliente = document.getElementById("cliente") as HTMLSelectElement
+       
+        var servico =  servicos.filter((obj)=>{
+            return obj.Id === Number( IdServico.value)
+        })
+        var cliente =  clientes.filter((obj)=>{
+            return obj.Id === Number( IdCliente.value)
+        })
+        console.log(cliente)
+        fetch("/cadastrarClienteServico", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                IdCliente : IdCliente.value,
+                IdServico : IdServico.value,
+                Genero : cliente[0].Genero,
+                Nome: servico[0].Nome,
+                Preco : servico[0].Preco
+
+            })
+        }).then((res)=> res.json()).then((data)=>{
+            console.log(data)
+           alert(data.mensagem)
+        })
+        
+       }
    
     useEffect(()=>{
         
@@ -59,7 +90,7 @@ function CadastroClienteServico (){
                     <div className="col s12 ">
                         <div className="card ">
                             <div className="card-content ">
-                            <h1 className="card-title">CADASTRAR CLIENTE/PRODUTO</h1>
+                            <h1 className="card-title">CADASTRAR CLIENTE/SERVICO</h1>
                             <hr></hr>
                             <div className="card-body">
                                 <div className="row">
@@ -67,7 +98,7 @@ function CadastroClienteServico (){
                                     
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <select id="servio" className="select">
+                                                <select id="servico" className="select">
                                                 <option value="" disabled selected>Selecione..</option>
                                                 {servicos.map(function (a) {
                                                     return <option value={a.Id}> {a.Nome}</option>
@@ -94,11 +125,10 @@ function CadastroClienteServico (){
                                         </div>
                                         <div className="row">
                                             <div className=" col s12">
-                                            <button className="btn " id="voltar" > 
-                                            <Link to="/servicos">Voltar</Link>
-                                        
+                                            <button className="btn " id="voltar" onClick={(e)=>{e.preventDefault(); window.location.href = "/servicos"}} > 
+                                            Voltar
                                             </button>
-                                            <button className="btn float" id="cadastrar"> Cadastrar</button>
+                                            <button className="btn float" id="cadastrar" onClick={cadastrarConsumo}> Cadastrar</button>
                                             </div>
                                         </div>
                                 

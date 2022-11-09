@@ -1,6 +1,6 @@
 import conexao from "../Conexao/conexao";
 const sequelize = require("Sequelize");
-var ClienteProduto = conexao.define("servicos", {
+var ClienteProduto = conexao.define("clienteProdutos", {
     IdProduto:{
         type: sequelize.INTEGER,
         
@@ -8,8 +8,18 @@ var ClienteProduto = conexao.define("servicos", {
     IdCliente:{
         type: sequelize.INTEGER
     },
+    Genero:{
+        type: sequelize.INTEGER
+    },
+    Nome:{
+        type: sequelize.STRING
+    },
+    Preco:{
+        type: sequelize.REAL(6,2)
+    }
    
 
 })
+ClienteProduto.removeAttribute('id');
 
 export default ClienteProduto;

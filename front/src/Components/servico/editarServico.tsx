@@ -14,7 +14,7 @@ class EditarServico extends Component{
         var dados ={
             Id: id,
             Nome:  nome.value,
-            Preco: parseFloat(preco.value),
+            Preco: parseFloat(preco.value.replace(",", ".")),
             
         }
 
@@ -73,7 +73,7 @@ class EditarServico extends Component{
                                         <div className="row">
                                             <div className="input-field col s12">
                                                 <p>Nome</p>
-                                            <input placeholder="" id="nome" type="text" className="validate"/>
+                                            <input placeholder=""  id="nome" type="text" className="validate"/>
                                            
                                             </div>
                                             

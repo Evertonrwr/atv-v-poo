@@ -12,7 +12,7 @@ class CadastroServico extends Component{
         
         var dados ={
             Nome:  nome.value,
-            Preco: parseFloat(preco.value),
+            Preco: parseFloat(preco.value.replace(",", ".")),
             
         }
 
@@ -64,9 +64,8 @@ class CadastroServico extends Component{
                                        
                                         <div className="row">
                                             <div className=" col s12">
-                                            <button className="btn " id="voltar" > 
-                                            <Link to="/servicos">Voltar</Link>
-                                           
+                                            <button className="btn " id="voltar" onClick={(e)=>{e.preventDefault(); window.location.href = "/servicos"}} > 
+                                            Voltar
                                             </button>
                                             <button className="btn float" onClick={this.cadastrarServico}id="cadastrar"> Cadastrar</button>
                                             </div>

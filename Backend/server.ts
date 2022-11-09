@@ -1,6 +1,7 @@
 import express from 'express';
 import ClientesController from './Controllers/clientesController';
 import ServicoController from './Controllers/servicoController';
+import ProdutoController from './Controllers/produtosController';
 
 const app: express.Application = express();
 
@@ -10,6 +11,7 @@ app.use(express.json())
 
 app.use(ClientesController)
 app.use(ServicoController)
+app.use(ProdutoController)
 
 app.get('/', (_req, _res) => {
     _res.send("TypeScript With Expresss");

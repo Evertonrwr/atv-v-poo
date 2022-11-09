@@ -3,6 +3,9 @@
     import BarraNavegacao from "../barraNavegacao";
     import "../../Css/clientesIndex.css"
     import TabelasProduto from "./tabelaProdutos";
+    type props ={
+        geral: Array<any>
+    }
 
     var dados = [{
         Id: 0,
@@ -22,16 +25,54 @@
         Preco:3233
 
     }]
-    class ProdutosIndex extends Component{
+    class ProdutosIndex extends Component<{},{geral: Array<any>}>{
+        constructor(props: props | Readonly<props>) {
+            super(props)
+            this.state={
+                geral: []
+            }
+        }
+        listarProdutos = () =>{
+            fetch("/listarProduto", {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+            }).then((res)=> res.json()).then((data)=>{
+                console.log(data)
+               this.setState({
+                geral:data
+               })
+               
+            })
+        }
+        deletarProduto = (e:any)=>{
+            e.preventDefault();
+            fetch("/deletarProduto" + "?id="+ e.target.closest('tr').id,{
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+    
+            }).then((res)=> res.json()).then((data)=>{
+                alert("Deletado com sucesso")
+            })
+            this.tempo();
+    
+        }
+        tempo = ()  => {
+            this.listarProdutos();
+           
+        };
         
         componentDidMount() {
             let el = document.querySelectorAll('.tabs');
-        
+            this.listarProdutos();
             M.Tabs.init(el)
         }
 
         render(){
-            var botoes = [{valor: "ClIENTES", link:"/Clientes"}, {valor: "SERVIÇOS", link:"/servicos"},{valor: "PRODUTOS", link:"/produtos"} ]
+            var botoes = [{valor: "ClIENTES", link:"/Clientes"}, {valor: "SERVIÇOS", link:"/Produtos"},{valor: "PRODUTOS", link:"/produtos"} ]
             let barraNavegacao = <BarraNavegacao  tema="purple accent-4" botoes={botoes} />;
             return(
                 <div>
@@ -69,16 +110,16 @@
                                             </ul>
                                             </div>
                                             <div id="test1" className="col s12">
-                                                <TabelasProduto produto={dados}/>
+                                                <TabelasProduto produto={this.state.geral} deletar={this.deletarProduto}/>
                                             </div>
                                             <div id="test2" className="col s12">
-                                                <TabelasProduto produto={homens}/>
+                                                <TabelasProduto produto={homens} deletar={this.deletarProduto}/>
                                             </div>
                                             <div id="test3" className="col s12">
-                                                <TabelasProduto produto={mulheres}/>
+                                                <TabelasProduto produto={mulheres} deletar={this.deletarProduto}/>
                                             </div>
                                             <div id="test4" className="col s12">
-                                                <TabelasProduto produto={dados}/>
+                                                <TabelasProduto produto={dados} deletar={this.deletarProduto}/>
                                             </div>
                                         </div>
                                     

@@ -4,6 +4,7 @@ import BarraNavegacao from "../barraNavegacao";
 import "../../Css/clientesIndex.css"
 type props = {
     produto:Array<any>,
+    deletar:Function
     
 }
 class TabelasProduto extends Component<props> {
@@ -21,11 +22,11 @@ class TabelasProduto extends Component<props> {
             <td>{n.Preco}</td>
             
             <td className="center">
-                <Link className="" to="/editarProduto"> 
+                <Link className="" to={"/editarProduto/:id="+ n.Id} > 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
                 <Link className="" to="/cadastrarProduto"> 
-                    <i className=" botaoMedium small material-icons">delete</i> 
+                    <i  onClick={(e)=> this.props.deletar(e)} className=" botaoMedium small material-icons">delete</i> 
                 </Link>
                
                 

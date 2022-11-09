@@ -1,15 +1,14 @@
 import { Router } from "express";
 import { appendFile } from "fs";
-import Servico from "../Model/servicos";
-import ClienteServico from "../Model/clienteServico";
-const sequelize = require('Sequelize')
+import Produto from "../Model/produtos";
+import ClienteProduto from "../Model/clienteProduto";
 
-const ServicoController = Router();
+const ProdutoController = Router();
 
-ServicoController.post("/cadastrarServico", async(req, res)=>{
+ProdutoController.post("/cadastrarProduto", async(req, res)=>{
     var dados = req.body;
     try{
-        await Servico.create({
+        await Produto.create({
             Nome: dados.Nome,
             Preco: dados.Preco
     
@@ -28,10 +27,10 @@ ServicoController.post("/cadastrarServico", async(req, res)=>{
 
 })
 
-ServicoController.post("/editarServico", async(req, res)=>{
+ProdutoController.post("/editarProduto", async(req, res)=>{
     var dados = req.body;
     try{
-        await Servico.update({
+        await Produto.update({
             Nome: dados.Nome,
             Preco: dados.Preco
     
@@ -39,7 +38,7 @@ ServicoController.post("/editarServico", async(req, res)=>{
         }, {where:{Id: dados.Id}})
         res.json({
             ok: true,
-            mensagem: "Sucesso ao editar servico"
+            mensagem: "Sucesso ao editar Produto"
         })
     }catch(error){
         res.json({
@@ -51,32 +50,32 @@ ServicoController.post("/editarServico", async(req, res)=>{
 
 })
 
-ServicoController.delete("/deletarServico", async(req,res)=>{
+ProdutoController.delete("/deletarProduto", async(req,res)=>{
     var id = req.query.id
-    await Servico.destroy({where:{Id: id}})
+    await Produto.destroy({where:{Id: id}})
 })
 
-ServicoController.get("/buscarServico",async (req, res) => {
+ProdutoController.get("/buscarProduto",async (req, res) => {
     var id = req.query.id
-    await Servico.findByPk(id?.toString()).then((data)=>{
+    await Produto.findByPk(id?.toString()).then((data)=>{
         res.json(data)
     })
    
 })
 
-ServicoController.get("/listarServico", async (req, res)=>{
-    await Servico.findAll().then( (data)=>{
+ProdutoController.get("/listarProduto", async (req, res)=>{
+    await Produto.findAll().then( (data)=>{
         res.json(data)
     })
 
 })
 
-ServicoController.post("/cadastrarClienteServico", async (req, res)=>{
+ProdutoController.post("/cadastrarClienteProduto", async (req, res)=>{
     var dados = req.body;
     try{
-        await ClienteServico.create({
+        await ClienteProduto.create({
             IdCliente: dados.IdCliente,
-            IdServico: dados.IdServico,
+            IdProduto: dados.IdProduto,
             Genero: dados.Genero,
             Nome: dados.Nome,
             Preco: dados.Preco
@@ -95,5 +94,4 @@ ServicoController.post("/cadastrarClienteServico", async (req, res)=>{
     }
    
 })
-
-export default ServicoController;
+export default ProdutoController;

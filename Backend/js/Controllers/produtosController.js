@@ -13,14 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const servicos_1 = __importDefault(require("../Model/servicos"));
-const clienteServico_1 = __importDefault(require("../Model/clienteServico"));
-const sequelize = require('Sequelize');
-const ServicoController = (0, express_1.Router)();
-ServicoController.post("/cadastrarServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const produtos_1 = __importDefault(require("../Model/produtos"));
+const clienteProduto_1 = __importDefault(require("../Model/clienteProduto"));
+const ProdutoController = (0, express_1.Router)();
+ProdutoController.post("/cadastrarProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var dados = req.body;
     try {
-        yield servicos_1.default.create({
+        yield produtos_1.default.create({
             Nome: dados.Nome,
             Preco: dados.Preco
         });
@@ -36,16 +35,16 @@ ServicoController.post("/cadastrarServico", (req, res) => __awaiter(void 0, void
         });
     }
 }));
-ServicoController.post("/editarServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+ProdutoController.post("/editarProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var dados = req.body;
     try {
-        yield servicos_1.default.update({
+        yield produtos_1.default.update({
             Nome: dados.Nome,
             Preco: dados.Preco
         }, { where: { Id: dados.Id } });
         res.json({
             ok: true,
-            mensagem: "Sucesso ao editar servico"
+            mensagem: "Sucesso ao editar Produto"
         });
     }
     catch (error) {
@@ -55,27 +54,27 @@ ServicoController.post("/editarServico", (req, res) => __awaiter(void 0, void 0,
         });
     }
 }));
-ServicoController.delete("/deletarServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+ProdutoController.delete("/deletarProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var id = req.query.id;
-    yield servicos_1.default.destroy({ where: { Id: id } });
+    yield produtos_1.default.destroy({ where: { Id: id } });
 }));
-ServicoController.get("/buscarServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+ProdutoController.get("/buscarProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var id = req.query.id;
-    yield servicos_1.default.findByPk(id === null || id === void 0 ? void 0 : id.toString()).then((data) => {
+    yield produtos_1.default.findByPk(id === null || id === void 0 ? void 0 : id.toString()).then((data) => {
         res.json(data);
     });
 }));
-ServicoController.get("/listarServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    yield servicos_1.default.findAll().then((data) => {
+ProdutoController.get("/listarProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield produtos_1.default.findAll().then((data) => {
         res.json(data);
     });
 }));
-ServicoController.post("/cadastrarClienteServico", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+ProdutoController.post("/cadastrarClienteProduto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var dados = req.body;
     try {
-        yield clienteServico_1.default.create({
+        yield clienteProduto_1.default.create({
             IdCliente: dados.IdCliente,
-            IdServico: dados.IdServico,
+            IdProduto: dados.IdProduto,
             Genero: dados.Genero,
             Nome: dados.Nome,
             Preco: dados.Preco
@@ -92,4 +91,4 @@ ServicoController.post("/cadastrarClienteServico", (req, res) => __awaiter(void 
         });
     }
 }));
-exports.default = ServicoController;
+exports.default = ProdutoController;

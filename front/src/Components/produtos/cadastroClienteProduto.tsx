@@ -7,19 +7,19 @@ import { render } from "@testing-library/react";
 
 const  CadastroClienteProduto = () => {
     
-    var cliente =[{Id:0, Nome:""}]
-    var servico =[{Id:0, Nome:""}]
+    var cliente =[{Id:0, Nome:"", Genero:0}]
+    var produto =[{Id:0, Nome:"", Preco:0.1}]
     const [clientes, setClientes] = useState(cliente)
-    const [servicos, setServicos] = useState(servico)
+    const [produtos, setProdutos] = useState(produto)
     
-    var listarServicos = () =>{
-        fetch("/listarServico", {
+    var listarProduto = () =>{
+        fetch("/listarProduto", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
         }).then((res)=> res.json()).then((data)=>{
-            setServicos(data)
+            setProdutos(data)
         })
     }
     var listarClientes =() =>{
@@ -32,20 +32,50 @@ const  CadastroClienteProduto = () => {
            setClientes(data )
         })
     }
-   var clickMe = function (e:any){
-    e.preventDefault();
-    var Id = document.getElementById("servico") as HTMLSelectElement
-   var index =  servico.indexOf({
-        Id: parseInt(Id.value) ,
-        Nome: Id.textContent? Id.textContent: ""
-    } )
-    console.log(servicos[index])
-   }
+//    function clickMe (e:any){
+//     e.preventDefault();
+//     var Id = document.getElementById("servico") as HTMLSelectElement
+//     var index =  servicos.filter((obj)=>{
+//         console.log(Id.value)
+//         console.log(obj.Id)
+//         return obj.Id === Number( Id.value)
+//     })
+//     console.table(index)
+//    }
+    function cadastrarConsumo (e:any){
+        e.preventDefault();
+        var IdProduto = document.getElementById("produto") as HTMLSelectElement
+        var IdCliente = document.getElementById("cliente") as HTMLSelectElement
+        var produto =  produtos.filter((obj)=>{
+                    return obj.Id === Number( IdProduto.value)
+                })
+        var cliente =  clientes.filter((obj)=>{
+            return obj.Id === Number( IdCliente.value)
+        })
+        fetch("/cadastrarClienteProduto", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                IdCliente : IdCliente.value,
+                IdProduto : IdProduto.value,
+                Genero : cliente[0].Genero,
+                Nome: produto[0].Nome,
+                Preco : produto[0].Preco
+
+            })
+        }).then((res)=> res.json()).then((data)=>{
+            console.log(data)
+        alert(data.mensagem)
+        })
+        
+    }
     useEffect(()=>{
         let select = document.querySelectorAll('.select');
         M.FormSelect.init(select);
          listarClientes();
-         listarServicos();
+         listarProduto();
          setTimeout(() => {
             let select = document.querySelectorAll('.select');
             M.FormSelect.init(select);
@@ -74,9 +104,9 @@ const  CadastroClienteProduto = () => {
                                     
                                         <div className="row">
                                             <div className="input-field col s12">
-                                                <select id="servico" className="select">
+                                                <select id="produto" className="select">
                                                 <option value="" disabled selected>Selecione..</option>
-                                                {servicos.map(function (a) {
+                                                {produtos.map(function (a) {
                                                     return <option value={a.Id}> {a.Nome}</option>
                                                 })};
                                             
@@ -100,11 +130,10 @@ const  CadastroClienteProduto = () => {
                                         </div>
                                         <div className="row">
                                             <div className=" col s12">
-                                            <button className="btn " id="voltar" > 
-                                            <Link to="/servicos">Voltar</Link>
-                                        
+                                            <button className="btn " id="voltar" onClick={(e)=>{e.preventDefault(); window.location.href = "/produtos"}} > 
+                                            Voltar
                                             </button>
-                                            <button className="btn float" id="cadastrar" onClick={clickMe}> Cadastrar</button>
+                                            <button className="btn float" id="cadastrar" onClick={cadastrarConsumo}> Cadastrar</button>
                                             </div>
                                         </div>
                                 

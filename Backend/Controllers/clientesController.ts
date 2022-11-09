@@ -1,5 +1,7 @@
 import { Router } from "express";
 import Clientes from "../Model/clientes";
+import ClienteProduto from "../Model/clienteProduto";
+import ClienteServico from "../Model/clienteServico";
 const ClientesController = Router();
 
 ClientesController.post("/cadastroCliente", async (req, res) =>{

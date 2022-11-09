@@ -50,7 +50,7 @@ class App extends Component {
             <Route  path="/cadastrarClienteServico" element={<CadastroClienteServico/>} />
             <Route  path="/produtos" element={<ProdutosIndex/>} />
             <Route  path="/cadastrarProduto" element={<CadastroProduto/>} />
-            <Route  path="/editarProduto" element={<EditarProduto/>} />
+            <Route  path="/editarProduto/:id" element={<EditarProduto/>} />
             <Route  path="/cadastrarClienteProduto" element={<CadastroClienteProduto/>} />
             <Route path="*" element={<Navigate to="/" />} />
             
