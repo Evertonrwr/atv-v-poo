@@ -150,8 +150,9 @@
                                                 <li className="tab col s2"><a  className="active" href="#test1">Clientes</a></li>
                                                 <li className="tab col s2"><a  href="#test2">Homens</a></li>
                                                 <li className="tab col s2 "><a href="#test3">Mulheres</a></li>
-                                                <li className="tab col s2"><a href="#test4">+ Consumiram ($)</a></li>
+                                                {/* <li className="tab col s2"><a href="#test4">+ Consumiram ($)</a></li>
                                                 <li className="tab col s2"><a href="#test5">- Consumiram (qtd)</a></li>
+                                             */}
                                             </ul>
                                             </div>
                                             <div id="test1" className="col s12">
@@ -163,12 +164,12 @@
                                             <div id="test3" className="col s12">
                                                 <TabelasCliente clientes={this.state.mulheres} deletar={this.deletarUsuario}/>
                                             </div>
-                                            <div id="test4" className="col s12">
+                                            {/* <div id="test4" className="col s12">
                                                 <TabelasCliente clientes={dados} deletar={this.deletarUsuario}/>
                                             </div>
                                             <div id="test5" className="col s12">
                                                 <TabelasCliente clientes={dados} deletar={this.deletarUsuario}/>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     
                                         

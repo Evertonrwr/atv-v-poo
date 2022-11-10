@@ -92,4 +92,29 @@ ProdutoController.post("/cadastrarClienteProduto", (req, res) => __awaiter(void 
         });
     }
 }));
+ProdutoController.get("/listarProdMaisConsumidos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteProduto_1.default.findAndCountAll({
+        group: "IdProduto",
+    });
+    res.json({ count: count, rows: rows });
+}));
+ProdutoController.get("/listarProdMaisConsumidosMoney", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield clienteProduto_1.default.findAll({}).then((data) => {
+        res.json({ rows: data });
+    });
+}));
+ProdutoController.get("/listarProdMaisConsumidosHomens", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteProduto_1.default.findAndCountAll({
+        where: { Genero: 1 },
+        group: "IdProduto",
+    });
+    res.json({ count: count, rows: rows });
+}));
+ProdutoController.get("/listarProdMaisConsumidosMulheres", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { count, rows } = yield clienteProduto_1.default.findAndCountAll({
+        where: { Genero: 2 },
+        group: "IdProduto",
+    });
+    res.json({ count: count, rows: rows });
+}));
 exports.default = ProdutoController;

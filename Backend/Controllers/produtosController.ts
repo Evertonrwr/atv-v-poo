@@ -95,4 +95,38 @@ ProdutoController.post("/cadastrarClienteProduto", async (req, res)=>{
     }
    
 })
+ProdutoController.get("/listarProdMaisConsumidos", async (req, res)=>{
+   
+    const { count, rows } = await ClienteProduto.findAndCountAll({
+       
+        group: "IdProduto",
+        })
+   
+    res.json({count: count, rows: rows})
+})
+ProdutoController.get("/listarProdMaisConsumidosMoney", async (req, res)=>{
+   
+     await ClienteProduto.findAll({
+        }).then((data)=>{
+            res.json({rows:data})
+        })
+})
+ProdutoController.get("/listarProdMaisConsumidosHomens", async (req, res)=>{
+   
+    const { count, rows } = await ClienteProduto.findAndCountAll({
+       where:{Genero:1},
+        group: "IdProduto",
+        })
+   
+    res.json({count: count, rows: rows})
+})
+ProdutoController.get("/listarProdMaisConsumidosMulheres", async (req, res)=>{
+   
+    const { count, rows } = await ClienteProduto.findAndCountAll({
+       where:{Genero:2},
+        group: "IdProduto",
+        })
+   
+    res.json({count: count, rows: rows})
+})
 export default ProdutoController;

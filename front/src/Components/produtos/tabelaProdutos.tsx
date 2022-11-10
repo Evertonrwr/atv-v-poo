@@ -18,19 +18,23 @@ class TabelasProduto extends Component<props> {
         } else {
             let lista = this.props.produto.map( (n) =>
             <tr id={n.Id}>
-            <td>{n.Nome}</td>
-            <td>{n.Preco}</td>
+            {this.props.produto.some(item => item.hasOwnProperty('Nome'))?<td>{n.Nome}</td>: "" }
+            {this.props.produto.some(item => item.hasOwnProperty('Preco'))?<td>{n.Preco}</td>: "" }
+            {this.props.produto.some(item => item.hasOwnProperty('NomeCliente'))?<td>{n.NomeCliente}</td>: "" }
+            {this.props.produto.some(item => item.hasOwnProperty('Quantidade'))?<td>{n.Quantidade}</td>: "" }
+            {this.props.produto.some(item => item.hasOwnProperty('Consumo'))?<td>{n.Consumo}</td>: "" }
             
+            {this.props.produto.some(item => item.hasOwnProperty('Quantidade')) || this.props.produto.some(item => item.hasOwnProperty('NomeCliente'))?"": 
             <td className="center">
-                <Link className="" to={"/editarProduto/:id="+ n.Id} > 
+                <Link className="" to={"/editarProduto/:id=" +n.Id}> 
                     <i className=" botaoMedium small material-icons">create</i> 
                 </Link>
-                <Link className="" to="/cadastrarProduto"> 
+                <a> 
                     <i  onClick={(e)=> this.props.deletar(e)} className=" botaoMedium small material-icons">delete</i> 
-                </Link>
+                </a>
                
                 
-            </td>
+            </td>}
         </tr>
             )
             return lista
@@ -45,10 +49,16 @@ class TabelasProduto extends Component<props> {
                 <table className="striped responsive-table">
                     <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Preço</th>
+                        {this.props.produto.some(item => item.hasOwnProperty('Nome'))?<th>Nome</th>: "" }
+                        {this.props.produto.some(item => item.hasOwnProperty('Preco'))?<th>Preco</th>: "" }
+                        {this.props.produto.some(item => item.hasOwnProperty('NomeCliente') )?<th>Cliente</th>: "" }
+                        {this.props.produto.some(item => item.hasOwnProperty('Quantidade') )?<th>Quantidade</th>: "" }
                         
-                        <th className="center">Ações</th>
+                        {this.props.produto.some(item => item.hasOwnProperty('Consumo') )?<th>Consumo</th>: "" }
+                        {this.props.produto.some(item => item.hasOwnProperty('NomeCliente') ) 
+                        || this.props.produto.some(item => item.hasOwnProperty('Quantidade')) ?"":
+                         <th className="center">Ações</th> }
+                        
                     </tr>
                     </thead>
 

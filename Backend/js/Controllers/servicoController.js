@@ -26,7 +26,7 @@ ServicoController.post("/cadastrarServico", (req, res) => __awaiter(void 0, void
         });
         res.json({
             ok: true,
-            mensagem: "Sucesso ao cadastrar cliente"
+            mensagem: "Sucesso ao cadastrar servico"
         });
     }
     catch (error) {

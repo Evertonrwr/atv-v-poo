@@ -16,7 +16,7 @@ ServicoController.post("/cadastrarServico", async(req, res)=>{
         })
         res.json({
             ok: true,
-            mensagem: "Sucesso ao cadastrar cliente"
+            mensagem: "Sucesso ao cadastrar servico"
         })
     }catch(error){
         res.json({

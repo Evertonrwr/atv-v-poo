@@ -54,7 +54,8 @@ function CadastroClienteServico (){
                 IdServico : IdServico.value,
                 Genero : cliente[0].Genero,
                 Nome: servico[0].Nome,
-                Preco : servico[0].Preco
+                Preco : servico[0].Preco,
+                NomeCliente: cliente[0].Nome
 
             })
         }).then((res)=> res.json()).then((data)=>{

@@ -62,7 +62,8 @@ const  CadastroClienteProduto = () => {
                 IdProduto : IdProduto.value,
                 Genero : cliente[0].Genero,
                 Nome: produto[0].Nome,
-                Preco : produto[0].Preco
+                Preco : produto[0].Preco,
+                NomeCliente: cliente[0].Nome
 
             })
         }).then((res)=> res.json()).then((data)=>{
